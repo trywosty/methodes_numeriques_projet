@@ -86,7 +86,7 @@ def main():
     pyplot.plot(solution.t, solution.y[2,:], label="X")
     pyplot.plot(solution.t, solution.y[3,:], label="R")
     pyplot.legend(loc="best")
-    pyplot.title("Modèle Sir")
+    pyplot.title("Modèle SEIR")
     pyplot.xlabel("Temps(t)")
     pyplot.ylabel("Nombre de personnes")
     pyplot.savefig("test.png")
