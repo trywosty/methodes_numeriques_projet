@@ -23,12 +23,11 @@ def bissection(f, x0, x1, tol):
   #est-ce que le changement de valeur est bonne, ou l'inverse ? 
 
 def secante(f, x0, x1, tol, it_max = 50):
-    mantisse  = 3*10**(-16)
-    iterant = 0
-    if tol < mantisse:
-        print("Erreur : Tolérance Impossible ! ")
-        return -1, -1
     try:
+        mantisse  = 3*10**(-16)
+        iterant = 0
+        if tol < mantisse:
+            raise ValueError("Tolérence plus grand que la mantisse !")
         f_x0 = f(x0)
         f_x1 = f(x1)
         
@@ -37,13 +36,12 @@ def secante(f, x0, x1, tol, it_max = 50):
             diff  = f_x1 - f_x0
             diff_num = x1-x0
             if not diff:
-                raise ValueError("Précision trop ambitieuse ! ")
+                raise ValueError('Précision trop ambitieuse ! ')
             if abs(f_x1) < mantisse:
                 print('Mantisse ! ')
                 return x1, -1 
             if iterant >it_max:
-                print("Ne converge pas !")
-                return x1, -1
+                raise StopIteration('On a dépasse le nombre max d\'itérations ! ')
             x2 = x1 - ((f_x1*(x1-x0)) / (diff))
             x0 = x1
             x1 = x2
@@ -53,6 +51,9 @@ def secante(f, x0, x1, tol, it_max = 50):
     except ZeroDivisionError :
             print("Division par zero ! ")
             return x1, -1
+    except StopIteration as e:
+            print("Boucle stoppée !  : ", e)
+            return x1, 1
     except Exception as e:
             print("Erreur survenue !  : ", e)
             return x1, -1
