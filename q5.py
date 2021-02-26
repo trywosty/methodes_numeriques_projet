@@ -7,11 +7,11 @@ def seirmodel(t, y, gamma, sigma, eta, Rstar):
     n = 10**7
     dy = np.zeros(5)
     #beta(t) et e(t) donc 5eqn, page 2 equations
-    dy[0] = (-y[4]*y[0]*y[2])/n            #s
+    dy[0] = (-y[4]*y[0]*y[2])/n                        #s
     dy[1] = (y[4]*y[0]*y[2])/n - (sigma*y[1])          #e
-    dy[2] = (sigma*y[1]) - (gamma*y[2])        #x
-    dy[3] = gamma*y[2]             #r
-    dy[4] = eta*((gamma*Rstar(t))-y[4])                      #beta
+    dy[2] = (sigma*y[1]) - (gamma*y[2])                #x
+    dy[3] = gamma*y[2]                                 #r
+    dy[4] = eta*((gamma*Rstar(t))-y[4])                #beta
     return dy
 
 """
