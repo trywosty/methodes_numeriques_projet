@@ -10,18 +10,6 @@ def sirmodel(t, y, beta , gamma):
     dy[2] = gamma*y[1]
     return dy
 
-def OLD_eulerexplicite_OLD(f, t_span, y0, h):
-    t_f = t_span[1]
-    t = np.array([t_span[0]])
-    y  = np.array([y0])
-    index = 0
-    while t[index] <= t_f:
-            y_t = y[index] + h*f(t[index], y[index])
-            y = np.append(y, [y_t], axis = 0)
-            t = np.append(t, t[index] + h)
-            index += 1
-    y = np.transpose(y)
-    return  t, y
 def eulerexplicite(f, t_span, y0, h):
     nbr_element = ((t_span[1] - t_span[0])//h) + 1 
     y = np.zeros((len(y0), nbr_element    ))
@@ -33,6 +21,7 @@ def eulerexplicite(f, t_span, y0, h):
         index += 1
         y[:,index] = y_t
     return t, y
+
 def main():
     n = 10**(7)
     x_0 = 100
