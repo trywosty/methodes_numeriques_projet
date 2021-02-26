@@ -56,7 +56,7 @@ def secante(f, x0, x1, tol, it_max = 50):
             return x1, -1
     except StopIteration as e:
             print("Boucle stoppée !  : ", e)
-            return x1, 1
+            return x1, -1
     except Exception as e:
             print("Erreur survenue !  : ", e)
             return x1, -1
