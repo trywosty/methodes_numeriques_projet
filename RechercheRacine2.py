@@ -120,36 +120,6 @@ def rechercheReprodSEIR(Xstar, gamma, sigma, eta, y0):
         r_it += 1000
     return r_max
 
-
-def OLD_recherchebetasir_OLD(Xstar, gamma, y0):
-    beta_init = 0.06 * 4
-    n = y0[0] + y0[1] + y0[2]
-    t_it = 0
-    solution_init = ode45(lambda t, y : sirmodel(t,y, beta_init, gamma), [0, 400], y0)
-    x_func = CubicSpline(solution_init.t, solution_init.y[1], bc_type="clamped")
-    s_func = CubicSpline(solution_init.t, solution_init.y[0], bc_type="clamped")
-    r_func = CubicSpline(solution_init.t, solution_init.y[2], bc_type="clamped")
-    index_max = np.where(solution_init.y[1,:] == np.amax(solution_init.y[1,:]))
-    borne_max = solution_init.t[index_max]
-    my_fun = lambda t_t : x_func(t_t)-Xstar
-    it = 0
-#   while it <= 400:
-#        temp = my_fun(it)
-#        print("f(x) = ",temp)
-#        print("x : ", it)
-#        it+=1
-    t, status = bissection(my_fun, 0, borne_max, 10**(-14))
- 
-    b_max, status_b_max = secante(b_max_fun, 0, beta_init, 10**(-12))
-    print("temps t : ", t)
-    print("borne max : y  ", solution_init.y[1].max())
-    print("borne max : t ", borne_max)
-    S_star = s_func(t)
-    R_star = r_func(t)
-    print(S_star)
-    beta_max = (gamma*n)/(S_star)
-    return beta_max
-
 #x, y = secante(lambda x : 1/x  , 0.5, 2, 10**(-5))
 def testbetasir():
     x_0 = 100
