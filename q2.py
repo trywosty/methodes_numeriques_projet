@@ -41,7 +41,7 @@ def main():
     pyplot.ylabel("Nombre de personnes")
     pyplot.savefig("test.png")
     print(solution.y[1].max())   
-    t1 ,y1 = eulerexplicite(lambda t, y : sirmodel(t,y,beta,gamma),[0, 400], [s_0, x_0, r_0], 1    )
+    t1 ,y1 = eulerexplicite(lambda t, y : sirmodel(t,y,beta,gamma),[0, 400], [s_0, x_0, r_0], 1)
     pyplot.figure()
     pyplot.plot(t1, y1[0,:], label="S")
     pyplot.plot(t1, y1[1,:], label="X")
