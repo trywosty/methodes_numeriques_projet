@@ -10,14 +10,17 @@ def bissection(f, x0, x1, tol):
         return x0, 1
     xi  = (x0 + x1) / 2
     print("je passe ici !")
+    f_x0 = f(x0) 
     while abs((x1-x0)/2) > tol:
        # print("je ne passe pas ici !")
         xi = (x1 + x0)/2
+        f_xi  = f(xi)
         print("milieu", xi)
-        if (f(x0)*f(xi) <= 0):
+        if (f_x0*f_xi <= 0):
             x1 = xi
         else:
             x0 = xi
+            f_x0 = f_xi
     #print("Tout s'est passé comme il faut")
     return (x1+x0)/2, 0
   #est-ce que le changement de valeur est bonne, ou l'inverse ? 
