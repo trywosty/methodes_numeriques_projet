@@ -51,6 +51,7 @@ def main():
     pyplot.plot(t1, y1[0,:], label="S")
     pyplot.plot(t1, y1[1,:], label="X")
     pyplot.plot(t1, y1[2,:], label="R")
+    pyplot.legend(loc="best")
     pyplot.title("Modèle Sir")
     pyplot.xlabel("Temps(t)")
     pyplot.ylabel("Nombre de personnes")    
