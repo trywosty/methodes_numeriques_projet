@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.integrate import solve_ivp as ode45
-from scipy.interpolate import CubicSpline
+
 def bissection(f, x0, x1, tol):
     if tol < 2*10**(-16):
         print('tolerance impossible')
@@ -34,7 +34,7 @@ def secante(f, x0, x1, tol, it_max = 50):
         while abs(f_x1) > tol:
             print("x : ", x1, " f_x1 : " , f_x1, " f_x1 - f_x0 : " , f_x1-f_x0)
             diff  = f_x1 - f_x0
-            diff_num = x1-x0
+           
             if not diff:
                 raise ValueError('Précision trop ambitieuse ! ')
             if abs(f_x1) < mantisse:
@@ -128,7 +128,6 @@ def testbetasir():
     r_0 = 0
     y0 = [s_0, x_0, r_0]
     gamma = 0.06
-    Xstar = 10**(4)
     my_beta = recherchebetaSIR(9.99*10**(6), 0.06, y0)
     solution_test = ode45(lambda t,y : sirmodel(t, y, my_beta, gamma), [0,400], y0)
     
