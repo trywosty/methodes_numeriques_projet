@@ -12,14 +12,11 @@ def sirmodel(t, y, beta , gamma):
 
 def eulerexplicite(f, t_span, y0, h):
     nbr_element = ((t_span[1] - t_span[0])//h) + 1 
-    y = np.zeros((len(y0), nbr_element    ))
+    y = np.empty((len(y0), nbr_element    ))
     t = np.linspace(t_span[0], t_span[1], num = nbr_element)
-    y[:,0] = y0
-    index = 0
-    while index < len(t)-1:
-        y_t = y[:,index] + h*f(t[index], y[:,index])
-        index += 1
-        y[:,index] = y_t
+    y[:,0] = y0  
+    for i in range(1, nbr_elemnt):    
+        y[:, i] = y[:,i - 1] + h*f(t[i - 1], y[:,i - 1])
     return t, y
 
 def main():
