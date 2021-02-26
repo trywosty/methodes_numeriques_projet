@@ -24,7 +24,7 @@ def bissection(f, x0, x1, tol):
 
 def secante(f, x0, x1, tol, it_max = 50):
     try:
-        mantisse  = 3*10**(-16)
+        mantisse  = 2*10**(-16)
         iterant = 0
         if tol < mantisse:
             raise ValueError("Tolérence plus grand que la mantisse !")
