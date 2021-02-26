@@ -15,7 +15,7 @@ def eulerexplicite(f, t_span, y0, h):
     y = np.empty((len(y0), nbr_element    ))
     t = np.linspace(t_span[0], t_span[1], num = nbr_element)
     y[:,0] = y0  
-    for i in range(1, nbr_elemnt):    
+    for i in range(1, nbr_element):    
         y[:, i] = y[:,i - 1] + h*f(t[i - 1], y[:,i - 1])
     return t, y
 
@@ -32,7 +32,7 @@ def main():
     pyplot.plot(solution.t, solution.y[0,:], label="S")
     pyplot.plot(solution.t, solution.y[1,:], label="X")
     pyplot.plot(solution.t, solution.y[2,:], label="R")
-    index_1 = np.where(solution.y[1] = solution.y[1].max())
+    index_1 = np.where(solution.y[1] == solution.y[1].max())
     time_max_1 = solution.t[index_1]
     pyplot.plot(time_max_1, solution.y[1].max(), 'ro', label = 'max')
     pyplot.legend(loc="best")
@@ -46,7 +46,7 @@ def main():
     pyplot.plot(t1, y1[0,:], label="S")
     pyplot.plot(t1, y1[1,:], label="X")
     pyplot.plot(t1, y1[2,:], label="R")
-    index = np.where(y1[1] = y1[1].max())
+    index = np.where(y1[1] == y1[1].max())
     time_max = t1[index]
     pyplot.plot(time_max, y1[1].max(), 'ro', label = 'max')
     pyplot.legend(loc="best")
