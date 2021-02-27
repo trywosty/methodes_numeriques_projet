@@ -1,7 +1,7 @@
 from scipy.integrate import solve_ivp as ode45
 import numpy as np
 from matplotlib import pyplot
-from scipy.interpolate import CubicSpline
+
 
 
 def bissection(f, x0, x1, tol):
@@ -25,7 +25,7 @@ def bissection(f, x0, x1, tol):
     return (x1+x0)/2, 0
   #est-ce que le changement de valeur est bonne, ou l'inverse ? 
 
-def seirmodel(t, y, gamma, sigma, eta, Rstar):
+def seirmodel(t, y, gamma, sigma, eta, R_init):
     n = 10**7
     dy = np.zeros(5)
     #beta(t) et e(t) donc 5eqn, page 2 equations
@@ -33,7 +33,7 @@ def seirmodel(t, y, gamma, sigma, eta, Rstar):
     dy[1] = (y[4]*y[0]*y[2])/n - (sigma*y[1])          #e
     dy[2] = (sigma*y[1]) - (gamma*y[2])        #x
     dy[3] = gamma*y[2]             #r
-    dy[4] = eta*((gamma*Rstar)-y[4])                      #beta
+    dy[4] = eta*((gamma*R_init)-y[4])                      #beta
     return dy
 #avec une valeur arbitraire fixée 
 
@@ -68,7 +68,7 @@ def rechercheReprodSEIR(Xstar, gamma, sigma, eta, y0):
 
 
 def main():
-    Rstar = 4  #logiquement R_random car on ne connait pas la valeur Rstar
+    R_init = 4  #logiquement R_random car on ne connait pas la valeur Rstar
     Xstar = 10**5
     gamma = 0.06
     eta = 0.1
@@ -77,9 +77,9 @@ def main():
     x_0 = 100
     s_0 = n - x_0
     r_0 = 0
-    b_0 = Rstar*gamma
+    b_0 = R_init*gamma
     e_0 = 0
-    solution = ode45(lambda t, y : seirmodel(t,y, gamma, sigma, eta, Rstar), [0, 400], [s_0, e_0, x_0, r_0, b_0])
+    solution = ode45(lambda t, y : seirmodel(t,y, gamma, sigma, eta, R_init), [0, 400], [s_0, e_0, x_0, r_0, b_0])
     pyplot.figure()
     pyplot.plot(solution.t, solution.y[0,:], label="S")
     pyplot.plot(solution.t, solution.y[1,:], label="E")
