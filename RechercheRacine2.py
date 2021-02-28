@@ -39,7 +39,7 @@ def secante(f, x0, x1, tol, it_max = 50):
             diff  = f_x1 - f_x0
            
             if not diff:
-                raise ValueError('Précision trop ambitieuse ! ')
+                raise ZeroDivisionError
             if abs(f_x1) < mantisse:
                 print('Mantisse ! ')
                 return x1, -1 
