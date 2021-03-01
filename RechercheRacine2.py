@@ -25,7 +25,7 @@ def bissection(f, x0, x1, tol):
     return (x1+x0)/2, 0
   #est-ce que le changement de valeur est bonne, ou l'inverse ? 
 
-def secante(f, x0, x1, tol, it_max = 50):
+def secante(f, x0, x1, tol, it_max = 150):
     try:
         iterant = 0
         if not tol:
