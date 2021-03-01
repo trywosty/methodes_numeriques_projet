@@ -39,9 +39,7 @@ def secante(f, x0, x1, tol, it_max = 150):
            
             if not diff:
                 raise ZeroDivisionError
-            if abs(f_x1) < mantisse:
-                print('Mantisse ! ')
-                return x1, -1 
+     
             if iterant >it_max:
                 raise StopIteration('On a dépasse le nombre max d\'itérations ! ')
             x2 = x1 - ((f_x1*(x1-x0)) / (diff))
