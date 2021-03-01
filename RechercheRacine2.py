@@ -2,8 +2,8 @@ import numpy as np
 from scipy.integrate import solve_ivp as ode45
 
 def bissection(f, x0, x1, tol):
-    if tol < 2*10**(-16):
-        print('tolerance impossible')
+    if not tol:
+        print('tolerance nulle ! Impossible')
         return x0,1
     if f(x0)*f(x1) > 0:
         print("Erreur : les f(x0) et f(x1) sont de même signe ! ")
@@ -27,10 +27,9 @@ def bissection(f, x0, x1, tol):
 
 def secante(f, x0, x1, tol, it_max = 50):
     try:
-        mantisse  = 2*10**(-16)
         iterant = 0
-        if tol < mantisse:
-            raise ValueError("Tolérence plus grand que la mantisse !")
+        if not tol:
+            raise ValueError("Tolérence nulle ! Impossible")
         f_x0 = f(x0)
         f_x1 = f(x1)
         
