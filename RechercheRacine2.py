@@ -59,6 +59,9 @@ def secante(f, x0, x1, tol, it_max = 50):
     except Exception as e:
             print("Erreur survenue !  : ", e)
             return x1, -1
+    except ValueError as e:
+            print("Erreur de valeur ! : ", e)
+            return x1, 1
         
     return x1, 0
 def sirmodel(t, y, beta , gamma):
