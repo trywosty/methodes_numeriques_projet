@@ -1,10 +1,6 @@
 import numpy as np
 from scipy.integrate import solve_ivp as ode45
 
-import numpy as np
-from scipy.integrate import solve_ivp as ode45
-
-
 def bissection(f, x0, x1, tol):
     if not tol:
         print('tolerance nulle ! Impossible')
