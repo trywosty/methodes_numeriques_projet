@@ -1,6 +1,9 @@
 import numpy as np
 from scipy.integrate import solve_ivp as ode45
 
+import numpy as np
+from scipy.integrate import solve_ivp as ode45
+
 
 def bissection(f, x0, x1, tol):
     if not tol:
@@ -23,6 +26,35 @@ def bissection(f, x0, x1, tol):
     #print("Tout s'est passé comme il faut")
     return [(x1+x0)/2, 0]
   #est-ce que le changement de valeur est bonne, ou l'inverse ? 
+
+def sirmodel(t, y, beta , gamma):
+    n = y[0] + y[1] + y[2]
+    dy = np.zeros(3)
+    dy[0] = (-beta * y[0] * y[1]) / n
+    dy[1] = (beta*y[0]*y[1]) / n - gamma*y[1]
+    dy[2] = gamma*y[1]
+    return dy
+
+def b_max_fun(beta, Xstar,gamma,  y0):
+    solution_init = ode45(lambda t, y : sirmodel(t,y, beta, gamma), [0, 400], y0)
+    return solution_init.y[1].max() - Xstar
+
+def recherchebetaSIR(Xstar, gamma, y0):
+    beta_it = 0.06 * 4
+    my_fun = lambda beta_test : b_max_fun(beta_test, Xstar, gamma, y0)
+    status = 1
+    it = 0
+    while status != 0:
+        if it >= 150:
+            print("Trop d'iterations! ")
+            return [0, 1]
+        if Xstar > (y0[0]+y0[1]+y0[2]):
+            print("Le nombre de personnes infectés ne peut pas dépasser le nombre d'habitant !")
+            return [0, -1]
+        beta_max, status = bissection(my_fun, 0, beta_it, 10**(-14))
+        beta_it += 1
+        it += 1
+    return [beta_max, 0]
 
 def secante(f, x0, x1, tol, it_max = 150):
     try:
@@ -61,42 +93,8 @@ def secante(f, x0, x1, tol, it_max = 150):
         
     return [x1, 0]
 
-def sirmodel(t, y, beta , gamma):
-    n = y[0] + y[1] + y[2]
-    dy = np.zeros(3)
-    dy[0] = (-beta * y[0] * y[1]) / n
-    dy[1] = (beta*y[0]*y[1]) / n - gamma*y[1]
-    dy[2] = gamma*y[1]
-    return dy
 
 #prend en compte toutes les possibilités ? -non convergence
-
-#vérifier les codes erreurs
-# f(x) = X- x*
-def b_max_fun(beta, Xstar,gamma,  y0):
-    solution_init = ode45(lambda t, y : sirmodel(t,y, beta, gamma), [0, 400], y0)
-    return solution_init.y[1].max() - Xstar
-
-def recherchebetaSIR(Xstar, gamma, y0, incr = 1, it_max=150):
-    beta_it = 0.06 * 4
-    my_fun = lambda beta_test : b_max_fun(beta_test, Xstar, gamma, y0)
-    status = 1
-    it = 0
-    while status != 0:
-        if it >= it_max:
-            print("Trop d'iterations! ")
-            return -1
-        if Xstar > (y0[0]+y0[1]+y0[2]):
-            print("Le nombre de personnes infectés ne peut pas dépasser le nombre d'habitant !")
-            return -1
-        beta_max, status = bissection(my_fun, 0, beta_it, 10**(-14))
-#        if status == -1:
-#            print("Le méthode ne converge pas !")
-#            return -1
-        beta_it += incr
-        it += 1
-    return beta_max
-
 
 
 #x, y = secante(lambda x : 1/x  , 0.5, 2, 10**(-5))
