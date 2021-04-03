@@ -27,7 +27,7 @@ def main():
     gamma = 0.06
     # beta = R0 * gamma
     beta = gamma * 4
-    solution = ode45(lambda t, y : sirmodel(t,y, beta, gamma), [0, 400], [s_0, x_0, r_0])
+    solution = ode45(lambda t, y : sirmodel(t,y, beta, gamma), [0, 400], [s_0, x_0, r_0], rtol = 10**-3)
     pyplot.figure()
     pyplot.plot(solution.t, solution.y[0,:], label="S")
     pyplot.plot(solution.t, solution.y[1,:], label="X")
