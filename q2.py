@@ -11,7 +11,7 @@ def sirmodel(t, y, beta , gamma):
     return dy
 
 def eulerexplicite(f, t_span, y0, h):
-    nbr_element = ((t_span[1] - t_span[0])//h) + 1 
+    nbr_element = int((t_span[1] - t_span[0])/h) + 1 
     y = np.empty((len(y0), nbr_element    ))
     t = np.linspace(t_span[0], t_span[1], num = nbr_element)
     y[:,0] = y0  
@@ -39,7 +39,7 @@ def main():
     pyplot.title("Modèle Sir - ODE45")
     pyplot.xlabel("Temps(t)")
     pyplot.ylabel("Nombre de personnes")
-    pyplot.savefig("ode45_Q2.eps")
+    pyplot.savefig("ode45.png")
     print(solution.y[1].max())   
     t1 ,y1 = eulerexplicite(lambda t, y : sirmodel(t,y,beta,gamma),[0, 400], [s_0, x_0, r_0], 10**-3)
     pyplot.figure()
@@ -50,10 +50,10 @@ def main():
     time_max = t1[index]
     pyplot.plot(time_max, y1[1].max(), 'ro', label = 'max')
     pyplot.legend(loc="best")
-    pyplot.title("Modèle Sir - EULER EXPLICITE")
+    pyplot.title("Modèle Sir - EulerExplicite")
     pyplot.xlabel("Temps(t)")
     pyplot.ylabel("Nombre de personnes")    
-    pyplot.savefig("eulerexpliciteQ2.eps")
+    pyplot.savefig("eulerexplicite.png")
     print(solution.y[1].max())
     function2 = CubicSpline(t1, y1[1], bc_type="clamped")
     print(function2)
