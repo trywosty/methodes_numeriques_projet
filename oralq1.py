@@ -161,3 +161,4 @@ Afficher un graphique de la fonction cosinus entre −2π et 2π
 def q15():
     x = np.linspace(-2*np.pi, 2*np.pi, 100)
     plt.plot(x, np.cos(x))
+    return
