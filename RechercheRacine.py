@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.integrate import solve_ivp as ode45
+import timeit
 
 def bissection(f, x0, x1, tol):
     if not tol:
@@ -100,11 +101,11 @@ def testbetasir():
     r_0 = 0
     y0 = [s_0, x_0, r_0]
     gamma = 0.06
-    my_beta = recherchebetaSIR(5*10**(5), 0.06, y0)
-    solution_test = ode45(lambda t,y : sirmodel(t, y, my_beta, gamma), [0,400], y0)
+    start = timeit.default_timer()
+    my_beta = recherchebetaSIR(101, 0.06, y0)
+    stop = timeit.default_timer()
+    print('Time: ', stop - start)  
+    solution_test = ode45(lambda t,y : sirmodel(t, y, my_beta[0], gamma), [0,400], y0)
     
-    print("beta", my_beta)
+    print("beta", my_beta[0])
     print("MAX VAL : ", solution_test.y[1].max())
-
-
-
