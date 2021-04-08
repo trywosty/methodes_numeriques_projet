@@ -87,7 +87,8 @@ def q8():
     y = np.array([1,2,1,2])
     q = polyfit(x, y, 3)
     q1 = poly(q)
-    plt.plot(x, q1(x), label='Spline')
+    lg = np.linspace(0,3,100)
+    plt.plot(lg, q1(lg), label='Spline')
     print(q1(1.5))
     return
     
@@ -161,4 +162,50 @@ Afficher un graphique de la fonction cosinus entre −2π et 2π
 def q15():
     x = np.linspace(-2*np.pi, 2*np.pi, 100)
     plt.plot(x, np.cos(x))
+    return 
+
+"""
+Cr´eer un vecteur de 1000 nombres al´eatoires et calculer la diff´erence entre
+chaque ´el´ement successif.
+"""
+
+def q16():
+    x = np.random.rand(1000)
+    y = np.roll(x, -1)
+    x -= y
+    x = x[:-1]
+    print(x)
+    
+"""
+Cr´eer une matrice 10 × 10 de nombres al´eatoires et donner la position des
+´el´ements strictement plus petit que 0.2
+"""
+def q17():
+    x = np.random.rand(10,10)
+    pos = np.argwhere(x < 0.2)
+    print(pos)
     return
+
+"""
+Cr´eer deux vecteurs a et b de 542 ´el´ements o`u a contient des nombres
+al´eatoires compris entre 0 et 10 et b contient tous les entiers entre 1 et 542.
+Effectuez le produit de a par b ´el´ement par ´el´ement et affichez le r´esultat
+"""
+
+def q18():
+    a = np.random.uniform(0,10,542)
+    b = np.arange(1,543,1)
+    y = np.dot(a,b)
+    print(y)
+    return 
+    
+"""
+Cr´eer deux matrices A et B de taille 100×100 remplies de nombres al´eatoires.
+Calculer le produit scalaire des deux diagonales des matrices A et B.
+"""
+
+def q19():
+    a = np.random.rand(100,100)
+    b = np.random.rand(100,100)
+    print(np.dot(np.diag(a), np.diag(b)))
+    return 
