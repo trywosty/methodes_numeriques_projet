@@ -31,10 +31,23 @@ def sirmodel(t, y, beta , gamma):
     dy[1] = (beta*y[0]*y[1]) / n - gamma*y[1]
     dy[2] = gamma*y[1]
     return dy
-
+# Fonction a valeur continue au lieu d'un tableau à valeurs discrètes
+# plus de precision
+def ternarySearchMax(t,tab, tol = 10**-10):
+    fun = CubicSpline(t, tab, bc_type='clamped')
+    f = 0
+    l = t[-1]
+    while abs(l-f) > tol :
+        f_third = f + (l-f)/3
+        l_third = l - (f_third-f)
+        print("f_third : ", f_third)
+        print("l_third : ", l_third)
+        (f := f_third) if fun(f_third) < fun(l_third) else (l := l_third)
+    return fun((f+l)/2)
+  
 def b_max_fun(beta, Xstar,gamma,  y0):
     solution_init = ode45(lambda t, y : sirmodel(t,y, beta, gamma), [0, 400], y0)
-    return solution_init.y[1].max() - Xstar
+    return ternarySearchMax(solution_init.t, solution_init.y[1]) - Xstar
 
 def recherchebetaSIR(Xstar, gamma, y0):
     beta_it = 0.06 * 4
