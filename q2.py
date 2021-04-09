@@ -18,7 +18,16 @@ def eulerexplicite(f, t_span, y0, h):
     for i in range(1, nbr_element):    
         y[:, i] = y[:,i - 1] + h*f(t[i - 1], y[:,i - 1])
     return t, y
-
+    fun = CubicSpline(t, tab, bc_type='clamped')
+    f = 0
+    l = t[-1]
+    while abs(l-f) > tol :
+        f_third = f + (l-f)/3
+        l_third = l - (f_third-f)
+        print("f_third : ", f_third)
+        print("l_third : ", l_third)
+        (f := f_third) if fun(f_third) < fun(l_third) else (l := l_third)
+    return (f + l)/2, fun((f+l)/2)
 def main():
     n = 10**(7)
     x_0 = 100
