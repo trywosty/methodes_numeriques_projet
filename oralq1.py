@@ -209,3 +209,27 @@ def q19():
     b = np.random.rand(100,100)
     print(np.dot(np.diag(a), np.diag(b)))
     return 
+
+"""
+Cr´eer un vecteur x allant de 0 `a 10 et un vecteur y = cos(x). Utilisez la
+fonction spline avec x et y pour calculer la valeur en x = 5.5.
+"""
+
+def q20():
+    x = np.linspace(0,10,100)
+    y = np.cos(x)
+    cs = CubicSpline(x, y)
+    print(cs(5.5))
+    return
+    
+"""
+Cr´eer un vecteur al´eatoire de dimension 100. D´eterminer le nombre de termes
+sup´erieurs `a 0.5.
+"""
+
+def q21():
+    x = np.random.rand(100)
+    a_number = 0.5
+    nombre_element = len([element for element in x if element > a_number])
+    print(nombre_element)
+    
