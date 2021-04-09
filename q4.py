@@ -20,7 +20,6 @@ def seirmodel(t, y, gamma, sigma, eta, R_init):
 
 def main():
     R_init = 4  #logiquement R_random car on ne connait pas la valeur Rstar
-    Xstar = 10**5
     gamma = 0.06
     eta = 0.1
     sigma = 0.2
