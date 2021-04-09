@@ -121,9 +121,7 @@ la fonction y = sin(x).
 
 def q11():
     x = np.arange(1,1001, 2)
-    print(x)
-    y = np.linspace(0,2*np.pi, 200)
-    plt.plot(y, np.sin(y), label = 'sin(x)')
+    plt.plot(x, np.sin(x), label = 'sin(x)')
     return
     
 """
@@ -226,10 +224,48 @@ def q20():
 Cr´eer un vecteur al´eatoire de dimension 100. D´eterminer le nombre de termes
 sup´erieurs `a 0.5.
 """
-
+#attention
 def q21():
     x = np.random.rand(100)
     a_number = 0.5
     nombre_element = len([element for element in x if element > a_number])
     print(nombre_element)
+    
+"""
+Faire un plot d’un cercle de rayon 10.
+"""
+def q22():
+    c = lambda x : (100-x**2)**(1/2) 
+    y = np.linspace(-10,10,100)
+    plt.figure()
+    plt.plot(y, c(y))
+    plt.plot(y, -c(y))
+    return 
+
+"""
+Construire un vecteur de dimension 20 dont les composantes sont x(i) = 10−i
+.
+Trouver la plus petite valeur de i telle que l’op´eration (1 + x(i)) − 1 donne 0.
+"""
+#vérifier
+def q23():
+    x = np.zeros(20)
+    i = 0
+    while i < 20:
+        x[i] = 10**-i
+        i+= 1
+    y = np.where((1+x-1)==0)
+    print(y[0][0])
+
+    
+"""
+Calculer la suite g´eom´etrique P30
+i=0 x
+i pour x = 0.5 sans utiliser d’instruction
+de boucle.
+"""
+
+def q24():
+    y = np.geomspace(1,0.5**30, 31)
+    print(sum(y))
     
