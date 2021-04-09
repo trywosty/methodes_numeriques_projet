@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp as ode45
 import timeit
+from scipy.interpolate import CubicSpline 
 
 def bissection(f, x0, x1, tol):
     if not tol:
