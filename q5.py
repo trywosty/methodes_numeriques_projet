@@ -47,7 +47,7 @@ def q5(t, R, gamma = 0.06, eta = 0.1, sigma = 0.2, n = 10**7, y0 = [10**7-100, 0
         pyplot.legend(loc='best')
         pyplot.title("Évolution du nombre de repoducction de la maladie selon un scénario donné")
         pyplot.xlabel('Temps')
-        pyplot.savefig('pic_r_q4.png')
+        pyplot.savefig('pic_r_q5.png')
         return
     except ValueError as e:
         print('Erreur dans les données : ', e)
