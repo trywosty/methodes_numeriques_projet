@@ -266,6 +266,70 @@ de boucle.
 """
 
 def q24():
-    y = np.geomspace(1,0.5**30, 31)
-    print(sum(y))
+    y = np.arange(0,31, 1)
+    print(sum(0.5**y))
+    
+"""
+Faire un plot de la fonction (1 − cos(x))/x2
+, pour x variant de 10−6 `a 10−4
+.
+"""
+
+def q25():
+    fct = lambda x : (1-np.cos(x))/x**2
+    y = np.linspace(10**-6, 10**-4, 20)
+    plt.plot(y, fct(y))
+    
+"""
+D´efinir un vecteur x comprenant les entiers de 1 `a 5 et un vecteur y =
+√
+x.
+Utiliser une interpolation par spline cubique pour calculer la valeur de y pour
+x = 2.5.
+"""
+def q26():
+    x = np.arange(1,6,1)
+    y = lambda v : v**(1/2)
+    cs = CubicSpline(x, y(x))
+    print(cs(2.5))
+    
+"""
+Cr´eer un vecteur al´eatoire de dimension 100. Trouver l’indice du plus grand
+´el´ement de ce vecteur.
+
+"""
+def q27():
+    x = np.random.rand(100)
+    y = np.argmax(x)
+    print(y)
+
+"""
+D´efinir une matrice A de 10 lignes et 10 colonnes telle que A(i, j) = cos(j) exp(i).
+
+"""
+
+def q28():
+    x = np.random.rand(10,10)
+    i = 0
+    j = 0
+    while i < 10:
+        while j < 10:
+            x[i, j] = np.cos(j)*np.exp(i)
+            j +=1
+        j = 0
+        i += 1
+    print(x[3,3])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
