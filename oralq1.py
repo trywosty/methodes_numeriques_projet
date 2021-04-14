@@ -65,6 +65,8 @@ def q5():
 
 def q6():
     x = np.random.rand(100,100)
+    y = np.argwhere(x < 0.01)
+    print(y)
     
 
 #Creer une spline reliant les points (0, 1),(1, 2),(2, 1),(3, 2). Evaluer sa valeur en 1.5
@@ -95,11 +97,7 @@ def q8():
 
 def q9():
     x = np.arange(1,101,1)
-    i = 0
-    while i < 100:
-        x[i] = x[i]* x[i]
-        i+=1
-    return np.sum(x)
+    print(sum(x*x))
      
 """
 Cr´eer un vecteur a contenant tous les entiers entre 1 et 100 et un vecteur b
@@ -277,7 +275,7 @@ Faire un plot de la fonction (1 − cos(x))/x2
 
 def q25():
     fct = lambda x : (1-np.cos(x))/x**2
-    y = np.linspace(10**-6, 10**-4, 20)
+    y = np.linspace(10**-6, 10**-4, 200)
     plt.plot(y, fct(y))
     
 """
