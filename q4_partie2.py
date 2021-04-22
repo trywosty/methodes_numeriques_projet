@@ -31,7 +31,7 @@ def ternarySearchMax(t,tab, tol = 10**-10):
     return fun((f+l)/2)
 
 def seirmodel(t, y, gamma, sigma, eta, R_init):
-    n = 10**7
+    n = y[0] + y[1] + y[2] + y[3] + y[4]
     dy = np.zeros(5)
     dy[0] = (-y[4]*y[0]*y[2])/n            #s
     dy[1] = (y[4]*y[0]*y[2])/n - (sigma*y[1])          #e
